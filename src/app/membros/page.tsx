@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { criarClienteServidor } from "@/lib/supabase/server";
 import { supabaseConfigurado } from "@/lib/supabase/env";
 import { sair } from "../entrar/actions";
+import { NOME_CATEGORIA, type Categoria } from "@/lib/categorias";
 
 export const metadata: Metadata = {
   title: "Área de membros | Comunidade Católica Lumen",
@@ -31,9 +32,25 @@ async function ConteudoMembro() {
 
   if (!data.user) redirect("/entrar");
 
+  // O banco só devolve o cadastro da própria pessoa (regra de acesso RLS).
+  const { data: pessoa } = await supabase
+    .from("pessoas")
+    .select("nome, categoria")
+    .eq("user_id", data.user.id)
+    .maybeSingle<{ nome: string; categoria: Categoria }>();
+
   return (
     <>
-      <p className="opacity-80">Você entrou como {data.user.email}.</p>
+      {pessoa ? (
+        <p className="opacity-80">
+          Olá, {pessoa.nome}. Sua categoria: {NOME_CATEGORIA[pessoa.categoria]}.
+        </p>
+      ) : (
+        <p className="opacity-80">
+          Você entrou como {data.user.email}, mas seu cadastro ainda não foi
+          completado pela coordenação.
+        </p>
+      )}
       <p className="max-w-md text-sm opacity-60">
         Em breve, aqui ficarão as formações, o calendário e a sua frequência.
       </p>
