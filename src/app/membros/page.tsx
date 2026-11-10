@@ -54,6 +54,14 @@ async function ConteudoMembro() {
     (f) => f.funcao === "controlador_geral",
   );
 
+  // Conteúdos de teste da escada (tarefa 1.7). O banco só devolve os que a
+  // categoria da pessoa permite (a sua e as anteriores; tudo para o
+  // Controlador Geral).
+  const { data: conteudos } = await supabase
+    .from("conteudos_teste")
+    .select("id, titulo, categoria")
+    .order("categoria");
+
   return (
     <>
       {pessoa ? (
@@ -78,6 +86,24 @@ async function ConteudoMembro() {
       <p className="max-w-md text-sm opacity-60">
         Em breve, aqui ficarão as formações, o calendário e a sua frequência.
       </p>
+      {pessoa && (
+        <section className="w-full max-w-sm rounded-lg border border-dashed border-black/20 p-4 text-left text-sm dark:border-white/20">
+          <h2 className="mb-2 font-medium">
+            Conteúdos que você pode ver ({conteudos?.length ?? 0})
+          </h2>
+          <ul className="list-disc pl-5 opacity-80">
+            {(conteudos ?? []).map((c) => (
+              <li key={c.id}>
+                {c.titulo}: {NOME_CATEGORIA[c.categoria as Categoria]}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs opacity-60">
+            Lista de teste da regra de acesso. Será substituída pelas
+            formações e documentos reais.
+          </p>
+        </section>
+      )}
       {ehControlador && (
         <Link href="/membros/controle" className="text-sm underline">
           Abrir o Painel do Controlador Geral
