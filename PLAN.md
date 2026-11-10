@@ -39,7 +39,7 @@ Pontos de LGPD a tratar desde o início: regras de acesso aplicadas no banco (n�
 ### Fase 1: Fundação e acessos
 - [x] 1.1 Criar o projeto no Supabase, escolhendo a região de São Paulo.
 - [x] 1.2 Projeto base no ar (página inicial simples) e publicado na Vercel.
-- [ ] 1.3 Login e senha por e-mail, cadastro feito pelo administrador.
+- [x] 1.3 Login e senha por e-mail, cadastro feito pelo administrador.
 - [ ] 1.4 Tabela de pessoas com categoria (escada: Acolhida, Formação 1, 2 e 3, Lumeniano, Pré-Candidato, Candidato 1 e 2, Consagrado).
 - [ ] 1.5 Tabela de funções (Assistentes, Conselho, Responsável de Grupo, Acompanhador, Economato etc.), com possibilidade de acumular funções.
 - [ ] 1.6 Painel do Controlador Geral para definir categoria e funções de cada pessoa.
