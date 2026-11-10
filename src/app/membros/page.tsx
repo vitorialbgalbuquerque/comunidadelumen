@@ -1,0 +1,50 @@
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { redirect } from "next/navigation";
+import { criarClienteServidor } from "@/lib/supabase/server";
+import { supabaseConfigurado } from "@/lib/supabase/env";
+import { sair } from "../entrar/actions";
+
+export const metadata: Metadata = {
+  title: "Área de membros | Comunidade Católica Lumen",
+};
+
+export default function PaginaMembros() {
+  return (
+    <main className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
+      <h1 className="text-3xl font-semibold tracking-tight">
+        Área de membros
+      </h1>
+      <Suspense fallback={<p className="opacity-60">Carregando...</p>}>
+        <ConteudoMembro />
+      </Suspense>
+    </main>
+  );
+}
+
+// Lê o login a cada acesso. Sem login, volta para "Entrar"
+// (segunda verificação, além do proxy).
+async function ConteudoMembro() {
+  if (!supabaseConfigurado) redirect("/entrar");
+  const supabase = await criarClienteServidor();
+  const { data } = await supabase.auth.getUser();
+
+  if (!data.user) redirect("/entrar");
+
+  return (
+    <>
+      <p className="opacity-80">Você entrou como {data.user.email}.</p>
+      <p className="max-w-md text-sm opacity-60">
+        Em breve, aqui ficarão as formações, o calendário e a sua frequência.
+      </p>
+      <form action={sair}>
+        <button
+          type="submit"
+          className="rounded-md border border-black/20 px-4 py-2 text-sm dark:border-white/20"
+        >
+          Sair
+        </button>
+      </form>
+    </>
+  );
+}

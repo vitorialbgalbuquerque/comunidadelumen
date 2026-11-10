@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
@@ -9,6 +11,9 @@ export default function Home() {
         Site em construção. Em breve, formações, calendário, eventos e
         informativos da comunidade em um só lugar.
       </p>
+      <Link href="/entrar" className="mt-4 text-sm underline opacity-80">
+        Área de membros
+      </Link>
     </main>
   );
 }
