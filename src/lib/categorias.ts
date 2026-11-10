@@ -26,19 +26,22 @@ export const NOME_CATEGORIA: Record<Categoria, string> = {
 };
 
 // Funções (SPEC.md, item 4): permissões extras, que podem ser acumuladas.
-export type Funcao =
-  | "controlador_geral"
-  | "conselho"
-  | "assistente_formacao"
-  | "assistente_evangelizacao"
-  | "assistente_eventos"
-  | "assistente_caridade_fraterna"
-  | "assistente_vida_consagrada"
-  | "assistente_apostolico"
-  | "assistente_comunicacao"
-  | "assistente_economato"
-  | "responsavel_grupo"
-  | "acompanhador";
+export const FUNCOES = [
+  "controlador_geral",
+  "conselho",
+  "assistente_formacao",
+  "assistente_evangelizacao",
+  "assistente_eventos",
+  "assistente_caridade_fraterna",
+  "assistente_vida_consagrada",
+  "assistente_apostolico",
+  "assistente_comunicacao",
+  "assistente_economato",
+  "responsavel_grupo",
+  "acompanhador",
+] as const;
+
+export type Funcao = (typeof FUNCOES)[number];
 
 export const NOME_FUNCAO: Record<Funcao, string> = {
   controlador_geral: "Controlador Geral",

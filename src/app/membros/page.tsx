@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { criarClienteServidor } from "@/lib/supabase/server";
@@ -49,6 +50,9 @@ async function ConteudoMembro() {
     }>();
 
   const funcoes = pessoa?.pessoa_funcoes.map((f) => NOME_FUNCAO[f.funcao]);
+  const ehControlador = pessoa?.pessoa_funcoes.some(
+    (f) => f.funcao === "controlador_geral",
+  );
 
   return (
     <>
@@ -74,6 +78,11 @@ async function ConteudoMembro() {
       <p className="max-w-md text-sm opacity-60">
         Em breve, aqui ficarão as formações, o calendário e a sua frequência.
       </p>
+      {ehControlador && (
+        <Link href="/membros/controle" className="text-sm underline">
+          Abrir o Painel do Controlador Geral
+        </Link>
+      )}
       <form action={sair}>
         <button
           type="submit"
