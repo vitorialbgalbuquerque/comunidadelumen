@@ -42,7 +42,7 @@ Pontos de LGPD a tratar desde o início: regras de acesso aplicadas no banco (n�
 - [x] 1.3 Login e senha por e-mail, cadastro feito pelo administrador.
 - [x] 1.4 Tabela de pessoas com categoria (escada: Acolhida, Formação 1, 2 e 3, Lumeniano, Pré-Candidato, Candidato 1 e 2, Consagrado).
 - [x] 1.5 Tabela de funções (Assistentes, Conselho, Responsável de Grupo, Acompanhador, Economato etc.), com possibilidade de acumular funções.
-- [ ] 1.6 Painel do Controlador Geral para definir categoria e funções de cada pessoa.
+- [x] 1.6 Painel do Controlador Geral para definir categoria e funções de cada pessoa.
 - [ ] 1.7 Regra de acesso por escada (cada categoria vê a sua e as anteriores) e acesso total do Controlador Geral.
   - Aceite: com usuários de teste de categorias diferentes, cada um só enxerga o que a spec permite. Visitante só vê a área pública.
 
